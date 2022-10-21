@@ -1,0 +1,23 @@
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+table,tr,th
+{
+    border: 1px solid gray;
+}
+th
+{
+    background-color: rgb(18, 18, 136);
+    padding: .5em;
+}
+.bg-even
+{
+    background: rgb(197, 195, 195);
+}
+.bg-odd
+{
+    background: rgb(243, 243, 135);
+}
+
