@@ -10,7 +10,10 @@
 </head>
 <body>
     <div class="pull-right mb-2">
-        <a class="btn text-center bg-light" href="{{ route('product.create') }}"> Create product</a>
+        @can('admin')
+            <a class="btn text-center bg-light" href="{{ route('product.create') }}"> Create product</a>
+        @endcan
+
     </div>
     <table>
         <thead>
@@ -32,15 +35,17 @@
                     <td>{{ $product->amount }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td>
-
                         <form action="{{ route('product.destroy',$product->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <button>delete</button>
+                            @can('superadmin')
+                                <button>delete</button>
+                            @endcan
                         </form>
-
                         <form action="{{ route('product.edit',$product->id) }}">
-                            <button>edit</button>
+                            @can('superadmin')
+                                <button>edit</button>
+                            @endcan
                         </form>
                     </td>
                 </tr>

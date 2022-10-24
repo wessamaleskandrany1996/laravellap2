@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,13 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test',function(){
+    dump(Auth::user());
+})->middleware('isadmin');
 
 // Route::resource('/product','\App\Http\controllers\productsController');
 
 Route::get('/product', [\App\Http\Controllers\ProductsController::class,'index'] )->name('product.index');
 Route::delete('/delete/{id}', [\App\Http\Controllers\ProductsController::class,'destroy'] )->name('product.destroy');
 Route::get('/edit/{id}', [\App\Http\Controllers\ProductsController::class,'edit'] )->name('product.edit');
-
 Route::put('/update/{id}', [\App\Http\Controllers\ProductsController::class,'update'] )->name('product.update');
 Route::get('/create', [\App\Http\Controllers\ProductsController::class,'create'] )->name('product.create');
 Route::post('/store', [\App\Http\Controllers\ProductsController::class,'store'] )->name('product.store');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['verify'=>true]);
